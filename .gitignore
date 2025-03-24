@@ -1,0 +1,37 @@
+# Archivos y directorios generados por el entorno virtual
+.venv/
+venv/
+env/
+
+# Archivos de configuración de IDE
+.idea/
+.vscode/
+
+# Archivos de compilación de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Archivos de base de datos
+*.db
+db.sqlite3
+
+# Archivos de migraciones
+*.log
+*.pot
+
+# Archivos generados por herramientas de frontend (si las usas)
+node_modules/
+dist/
+staticfiles/
+
+# Archivos de configuración local
+*.log
+.venv/
+*.pot
+
+# Otros archivos temporales y configuraciones
+.coverage
+tox/
+nox/
+.env

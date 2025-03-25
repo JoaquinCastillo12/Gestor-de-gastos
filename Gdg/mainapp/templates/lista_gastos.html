@@ -1,11 +1,73 @@
-<h2>Gastos de {{ usuario.nombre }}</h2>  <!-- Muestra el nombre del usuario -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Gastos - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
 
-<ul>
-    {% for gasto in gastos %}
-        {% if gasto.usuario.id == usuario_id %}
-        <li>
-            <strong>{{ gasto.descripcion }}</strong> - ${{ gasto.monto }}
-        </li>
-        {% endif %}
-    {% endfor %}
-</ul>
+    <div class="flex h-screen">
+        <!-- Menú lateral -->
+        <aside class="w-64 bg-blue-900 text-white p-5">
+            <h1 class="text-2xl font-bold mb-5">💰 Gestor de Gastos</h1>
+            <nav>
+                <ul>
+                    <li class="mb-3"><a href="{% url 'home' %}" class="block py-2 px-3 rounded hover:bg-blue-700">📊 Dashboard</a></li>
+                    <li class="mb-3"><a href="{% url 'gastos' %}" class="block py-2 px-3 rounded hover:bg-blue-700">💸 Gastos</a></li>
+                    <li class="mb-3"><a href="{% url 'ingresos' %}" class="block py-2 px-3 rounded hover:bg-blue-700">💰 Ingresos</a></li>
+                    <li class="mb-3"><a href="#" class="block py-2 px-3 rounded hover:bg-blue-700">📈 Reportes</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="flex-1 p-8">
+            <h2 class="text-3xl font-semibold mb-5">📊 Dashboard</h2>
+
+            <!-- Resumen -->
+            <div class="grid grid-cols-3 gap-4 mb-5">
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold">Saldo Actual</h3>
+                    <p class="text-2xl text-green-500 font-semibold">$3,500.00</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold">Total Gastos</h3>
+                    <p class="text-2xl text-red-500 font-semibold">$1,200.00</p>
+                </div>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-bold">Total Ingresos</h3>
+                    <p class="text-2xl text-green-500 font-semibold">$4,700.00</p>
+                </div>
+            </div>
+
+            <!-- Últimos Movimientos -->
+            <div class="bg-white p-5 rounded shadow mb-5">
+                <h3 class="text-xl font-semibold mb-3">📜 Últimos Movimientos</h3>
+                <ul>
+                    <li class="py-2 border-b flex justify-between">
+                        <span>🍕 Cena en restaurante</span>
+                        <span class="text-red-500">-$25.50</span>
+                    </li>
+                    <li class="py-2 border-b flex justify-between">
+                        <span>⛽ Gasolina</span>
+                        <span class="text-red-500">-$40.00</span>
+                    </li>
+                    <li class="py-2 border-b flex justify-between">
+                        <span>💰 Pago Freelance</span>
+                        <span class="text-green-500">+$700.00</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Gráficos (Ejemplo) -->
+            <div class="bg-white p-5 rounded shadow">
+                <h3 class="text-xl font-semibold mb-3">📊 Resumen Financiero</h3>
+                <p class="text-gray-500">Aquí puedes agregar gráficos interactivos con Chart.js o Recharts.</p>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

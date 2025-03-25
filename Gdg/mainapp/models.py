@@ -15,7 +15,7 @@ class Usuario(models.Model):
         return self.nombre
 
 class Gasto(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)  # Aquí se agrega un valor por defecto
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)  
     descripcion = models.CharField(max_length=255)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     fecha = models.DateField(auto_now_add=True)
@@ -23,4 +23,13 @@ class Gasto(models.Model):
 
     def __str__(self):
         return f"{self.usuario.nombre}: {self.descripcion} - ${self.monto}"
+
+class Ingreso(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)
+    descripcion = models.CharField(max_length=255)
+    monto = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.usuario.nombre}: {self.descripcion} +${self.monto}"
 

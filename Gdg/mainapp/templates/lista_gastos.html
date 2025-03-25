@@ -1,0 +1,11 @@
+<h2>Gastos de {{ usuario.nombre }}</h2>  <!-- Muestra el nombre del usuario -->
+
+<ul>
+    {% for gasto in gastos %}
+        {% if gasto.usuario.id == usuario_id %}
+        <li>
+            <strong>{{ gasto.descripcion }}</strong> - ${{ gasto.monto }}
+        </li>
+        {% endif %}
+    {% endfor %}
+</ul>

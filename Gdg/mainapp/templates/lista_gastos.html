@@ -14,10 +14,11 @@
             <h1 class="text-2xl font-bold mb-5">💰 Gestor de Gastos</h1>
             <nav>
                 <ul>
-                    <li class="mb-3"><a href="{% url 'home' %}" class="block py-2 px-3 rounded hover:bg-blue-700">📊 Dashboard</a></li>
+                    <li class="mb-3"><a href="{% url 'dashboard' %}" class="block py-2 px-3 rounded hover:bg-blue-700">📊 Dashboard</a></li>
                     <li class="mb-3"><a href="{% url 'gastos' %}" class="block py-2 px-3 rounded hover:bg-blue-700">💸 Gastos</a></li>
                     <li class="mb-3"><a href="{% url 'ingresos' %}" class="block py-2 px-3 rounded hover:bg-blue-700">💰 Ingresos</a></li>
                     <li class="mb-3"><a href="#" class="block py-2 px-3 rounded hover:bg-blue-700">📈 Reportes</a></li>
+                    <li class="mb-3"><a href="{% url 'logout' %}" class="block py-2 px-3 rounded hover:bg-blue-700">Cerrar Sesión</a></li>
                 </ul>
             </nav>
         </aside>
@@ -30,15 +31,17 @@
             <div class="grid grid-cols-3 gap-4 mb-5">
                 <div class="bg-white p-4 rounded shadow">
                     <h3 class="text-lg font-bold">Saldo Actual</h3>
-                    <p class="text-2xl text-green-500 font-semibold">$3,500.00</p>
+                    <p class="text-2xl {% if saldo_actual >= 0 %} text-green-500 {% else %} text-red-500 {% endif %} font-semibold">
+                        ${{ saldo_actual|floatformat:2 }}
+                    </p>
                 </div>
                 <div class="bg-white p-4 rounded shadow">
                     <h3 class="text-lg font-bold">Total Gastos</h3>
-                    <p class="text-2xl text-red-500 font-semibold">$1,200.00</p>
+                    <p class="text-2xl text-red-500 font-semibold">${{ total_gastos|floatformat:2 }}</p>
                 </div>
                 <div class="bg-white p-4 rounded shadow">
                     <h3 class="text-lg font-bold">Total Ingresos</h3>
-                    <p class="text-2xl text-green-500 font-semibold">$4,700.00</p>
+                    <p class="text-2xl text-green-500 font-semibold">${{ total_ingresos|floatformat:2 }}</p>
                 </div>
             </div>
 
@@ -46,18 +49,19 @@
             <div class="bg-white p-5 rounded shadow mb-5">
                 <h3 class="text-xl font-semibold mb-3">📜 Últimos Movimientos</h3>
                 <ul>
-                    <li class="py-2 border-b flex justify-between">
-                        <span>🍕 Cena en restaurante</span>
-                        <span class="text-red-500">-$25.50</span>
-                    </li>
-                    <li class="py-2 border-b flex justify-between">
-                        <span>⛽ Gasolina</span>
-                        <span class="text-red-500">-$40.00</span>
-                    </li>
-                    <li class="py-2 border-b flex justify-between">
-                        <span>💰 Pago Freelance</span>
-                        <span class="text-green-500">+$700.00</span>
-                    </li>
+                    {% for gasto in gastos %}
+                        <li class="py-2 border-b flex justify-between">
+                            <span>{{ gasto.descripcion }}</span>
+                            <span class="text-red-500">-${{ gasto.monto|floatformat:2 }}</span>
+                        </li>
+                    {% endfor %}
+                    
+                    {% for ingreso in ingresos %}
+                        <li class="py-2 border-b flex justify-between">
+                            <span>{{ ingreso.descripcion }}</span>
+                            <span class="text-green-500">+${{ ingreso.monto|floatformat:2 }}</span>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
 

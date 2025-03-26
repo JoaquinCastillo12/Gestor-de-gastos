@@ -14,10 +14,11 @@
             <h1 class="text-2xl font-bold mb-5">💰 Gestor de Gastos</h1>
             <nav>
                 <ul>
-                    <li class="mb-3"><a href="{% url 'home' %}" class="block py-2 px-3 rounded hover:bg-blue-700">📊 Dashboard</a></li>
+                    <li class="mb-3"><a href="{% url 'dashboard' %}" class="block py-2 px-3 rounded hover:bg-blue-700">📊 Dashboard</a></li>
                     <li class="mb-3"><a href="{% url 'gastos' %}" class="block py-2 px-3 rounded hover:bg-blue-700">💸 Gastos</a></li>
                     <li class="mb-3"><a href="{% url 'ingresos' %}" class="block py-2 px-3 rounded hover:bg-blue-700">💰 Ingresos</a></li>
                     <li class="mb-3"><a href="#" class="block py-2 px-3 rounded hover:bg-blue-700">📈 Reportes</a></li>
+                    <li class="mb-3"><a href="{% url 'logout' %}" class="block py-2 px-3 rounded hover:bg-blue-700">Cerrar Sesion</a></li>
                 </ul>
             </nav>
         </aside>
@@ -33,30 +34,24 @@
                     <thead>
                         <tr class="bg-gray-200">
                             <th class="py-2 px-4 text-left">Fecha</th>
-                            <th class="py-2 px-4 text-left">Descripción</th>
                             <th class="py-2 px-4 text-left">Fuente</th>
                             <th class="py-2 px-4 text-right">Monto</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for ingresos in ingresos %}
                         <tr class="border-b">
-                            <td class="py-2 px-4">2025-03-24</td>
-                            <td class="py-2 px-4">💼 Salario</td>
-                            <td class="py-2 px-4">Trabajo</td>
-                            <td class="py-2 px-4 text-green-500 text-right">+$1,500.00</td>
+                            <td class="py-2 px-4">{{ ingresos.fecha }}</td>
+                            <td class="py-2 px-4">{{ ingresos.descripcion }}</td>
+                            <td class="py-2 px-4 text-green-500 text-right">{{ ingresos.monto }}</td>
                         </tr>
-                        <tr class="border-b">
-                            <td class="py-2 px-4">2025-03-22</td>
-                            <td class="py-2 px-4">🛠️ Proyecto Freelance</td>
-                            <td class="py-2 px-4">Freelance</td>
-                            <td class="py-2 px-4 text-green-500 text-right">+$700.00</td>
-                        </tr>
+                        {% empty %}
                         <tr>
-                            <td class="py-2 px-4">2025-03-20</td>
-                            <td class="py-2 px-4">🎁 Regalo</td>
-                            <td class="py-2 px-4">Familia</td>
-                            <td class="py-2 px-4 text-green-500 text-right">+$100.00</td>
+                            <td colspan="4" class="py-4 text-center text-gray-500">
+                                No tienes ingresos registrados.
+                            </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

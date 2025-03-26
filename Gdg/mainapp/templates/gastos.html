@@ -14,10 +14,11 @@
             <h1 class="text-2xl font-bold mb-5">💰 Gestor de Gastos</h1>
             <nav>
                 <ul>
-                    <li class="mb-3"><a href="{% url 'home' %}" class="block py-2 px-3 rounded hover:bg-blue-700">📊 Dashboard</a></li>
+                    <li class="mb-3"><a href="{% url 'dashboard' %}" class="block py-2 px-3 rounded hover:bg-blue-700">📊 Dashboard</a></li>
                     <li class="mb-3"><a href="{% url 'gastos' %}" class="block py-2 px-3 rounded hover:bg-blue-700">💸 Gastos</a></li>
                     <li class="mb-3"><a href="{% url 'ingresos' %}" class="block py-2 px-3 rounded hover:bg-blue-700">💰 Ingresos</a></li>
                     <li class="mb-3"><a href="#" class="block py-2 px-3 rounded hover:bg-blue-700">📈 Reportes</a></li>
+                    <li class="mb-3"><a href="{% url 'logout' %}" class="block py-2 px-3 rounded hover:bg-blue-700">Cerrar Sesion</a></li>
                 </ul>
             </nav>
         </aside>
@@ -26,7 +27,9 @@
         <main class="flex-1 p-8">
             <h2 class="text-3xl font-semibold mb-5">💸 Gastos</h2>
 
-            <button class="mb-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">➕ Agregar Gasto</button>
+            <button class="mb-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                ➕ Agregar Gasto
+            </button>
 
             <div class="bg-white p-5 rounded shadow">
                 <table class="w-full border-collapse">
@@ -39,24 +42,20 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for gasto in gastos %}
                         <tr class="border-b">
-                            <td class="py-2 px-4">2025-03-24</td>
-                            <td class="py-2 px-4">🍔 Comida rápida</td>
-                            <td class="py-2 px-4">Alimentación</td>
-                            <td class="py-2 px-4 text-red-500 text-right">-$15.00</td>
+                            <td class="py-2 px-4">{{ gasto.fecha }}</td>
+                            <td class="py-2 px-4">{{ gasto.descripcion }}</td>
+                            <td class="py-2 px-4">{{ gasto.categoria }}</td>
+                            <td class="py-2 px-4 text-red-500 text-right">-{{ gasto.monto }}</td>
                         </tr>
-                        <tr class="border-b">
-                            <td class="py-2 px-4">2025-03-22</td>
-                            <td class="py-2 px-4">⛽ Gasolina</td>
-                            <td class="py-2 px-4">Transporte</td>
-                            <td class="py-2 px-4 text-red-500 text-right">-$40.00</td>
-                        </tr>
+                        {% empty %}
                         <tr>
-                            <td class="py-2 px-4">2025-03-20</td>
-                            <td class="py-2 px-4">🛍️ Ropa</td>
-                            <td class="py-2 px-4">Compras</td>
-                            <td class="py-2 px-4 text-red-500 text-right">-$75.00</td>
+                            <td colspan="4" class="py-4 text-center text-gray-500">
+                                No tienes gastos registrados.
+                            </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
